@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 import MainPage from './MainPage/MainPage';
 import FolderPage from './FolderPage/FolderPage';
 import NotePage from './NotePage/NotePage';
+import NotFoundPage from '/NotFoundPage/NotFoundPage';
 
 export default class App extends Component {
   render() {
@@ -15,19 +16,25 @@ export default class App extends Component {
           </Link>
         </header>
         <main>
-          <Route
-            exact
-            path='/'
-            component={MainPage}
-          />
-          <Route
-            path='/folder/:folderId'
-            component={FolderPage}
-          />
-          <Route
-            path='/note/:noteId'
-            component={NotePage}
-          />
+          <Switch>
+            <Route
+              exact
+              path='/'
+              component={MainPage}
+            />
+            <Route
+              path='/folder/:folderId'
+              component={FolderPage}
+            />
+            <Route
+              path='/note/:noteId'
+              component={NotePage}
+            />
+            <Route
+              component={NotFoundPage}
+            />
+          </Switch>
+          
         </main>
       </div>
     );
