@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import './App.css';
+import MainPage from './MainPage/MainPage';
+import FolderPage from './FolderPage/FolderPage';
+import NotePage from './NotePage/NotePage';
 
 export default class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Noteful</h1>
+          <Link to='/'>
+            Noteful
+          </Link>
         </header>
         <main>
           <Route
+            exact
             path='/'
             component={MainPage}
           />
