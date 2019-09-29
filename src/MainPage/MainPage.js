@@ -1,9 +1,12 @@
 import React from 'react';
-import FolderPage from '../FolderPage/FolderPage';
+import Folders from '../Folders/Folders';
+import Notes from '../Notes/Notes';
 
 export default function MainPage() {
     return (
-        <FolderPage />
-        
+        <div className='mainPage'>
+            <Folders />
+            <Notes />
+        </div>
     )
 }
