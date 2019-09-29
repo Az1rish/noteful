@@ -4,7 +4,7 @@ import './App.css';
 import MainPage from './MainPage/MainPage';
 import FolderPage from './FolderPage/FolderPage';
 import NotePage from './NotePage/NotePage';
-import NotFoundPage from '/NotFoundPage/NotFoundPage';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 export default class App extends Component {
   render() {
@@ -33,8 +33,7 @@ export default class App extends Component {
             <Route
               component={NotFoundPage}
             />
-          </Switch>
-          
+          </Switch> 
         </main>
       </div>
     );
