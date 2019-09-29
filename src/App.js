@@ -6,12 +6,14 @@ import FolderPage from './FolderPage/FolderPage';
 import NotePage from './NotePage/NotePage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <Link to='/'>
+          <Link 
+            to='/'
+            className="App-link">
             Noteful
           </Link>
         </header>
@@ -39,3 +41,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;
