@@ -1,21 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import STORE from '../Store';
 import './Folders.css';
 
-export default function Folders() {
+export default function Folders(props) {
     return (
-        <ul className='FolderList'>
-            {STORE.folders.map(folder =>
-                <Link 
-                    to={`/folder/${folder.id}`}
-                    key={folder.id}
-                    >
-                    <li className='folder'>
-                        {folder.name}
-                    </li> 
-                </Link>
+        <div className='Folders-nav'>
+            <button
+                tag='button'
+                role='link'
+                onClick={() => props.history.goBack()}
+                className='Folders-nav-backBtn'
+            >
+                Back
+            </button>
+            {props.folder && (
+                <h3 className='Folders-nav-folder'>
+                    {props.folder.name}
+                </h3>
             )}
-        </ul>
+        </div>
     )
+}
+
+Folders.defaultProps = {
+    history: {
+        goBack: () => {}
+    }
 }

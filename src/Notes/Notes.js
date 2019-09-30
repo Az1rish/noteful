@@ -1,24 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import STORE from '../Store';
 import './Notes.css';
+import { format } from 'date-fns';
 
-export default function Notes() {
+export default function Notes(props) {
     return (
-        <ul className='NotesList'>
-            {STORE.notes.map(note =>
-                <Link 
-                    to={`/note/${note.id}`}
-                    key={note.id}>
-                    <li className='note'>                  
-                        {note.name}
-                        {note.modified}
-                        <button className='deleteNote'>
-                            Delete Note
-                        </button>
-                    </li>
+        <div className='Note'>
+            <h2 className='Note-title'>
+                <Link to={`/note/${props.id}`}>
+                    {props.name}
                 </Link>
-            )}
-        </ul> 
+            </h2>
+            <button className='Note-delete' type='button'>
+                Remove
+            </button>
+            <div className='Note-dates'>
+                <div className='Note-dates-modified'>
+                    Modified
+                    <span className='Date'>
+                        {format(props.modified, 'Do MMM YYYY')}
+                    </span>
+                </div>
+            </div>
+        </div> 
     )
 }

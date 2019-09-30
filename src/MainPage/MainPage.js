@@ -23,3 +23,7 @@ export default function MainPage(props) {
         </section>
     )
 }
+
+MainPage.defaultProps = {
+    notes: [],
+}
