@@ -4,6 +4,7 @@ import './App.css';
 import MainPage from './MainPage/MainPage';
 import FolderPage from './FolderPage/FolderPage';
 import Folders from './Folders/Folders';
+import NotePage from './NotePage/NotePage';
 import STORE from './Store';
 
 const findFolder = (folders=[], folderId) =>
@@ -91,7 +92,7 @@ export default class App extends Component {
           render={routeProps => {
             const {noteId} = routeProps.match.params;
             const note = findNote(notes,noteId);
-            return <MainPage {...routeProps} note={note} />;
+            return <NotePage {...routeProps} note={note} />;
           }}
         />
       </>
@@ -112,7 +113,7 @@ export default class App extends Component {
           {this.renderFolderRoutes()}
         </nav>
         <main className='App-main'>
-          {this.renderNoteRoutes} 
+          {this.renderNoteRoutes()} 
         </main>
       </div>
     );
