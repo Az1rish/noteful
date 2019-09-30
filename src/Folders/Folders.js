@@ -7,11 +7,14 @@ export default function Folders() {
     return (
         <ul className='FolderList'>
             {STORE.folders.map(folder =>
-                <li key={folder.id}>
-                    <Link to={`/folder/${folder.id}`}>
+                <Link 
+                    to={`/folder/${folder.id}`}
+                    key={folder.id}
+                    >
+                    <li className='folder'>
                         {folder.name}
-                    </Link>
-                </li>
+                    </li> 
+                </Link>
             )}
         </ul>
     )

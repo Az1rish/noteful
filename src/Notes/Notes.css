@@ -1,0 +1,14 @@
+.NotesList {
+    padding: 0;
+    margin: 0;
+}
+
+.note {
+    border-radius: 5px;
+    padding: 10px 0;
+    margin: 2px;
+}
+
+.note:active {
+    background: lightblue;
+}

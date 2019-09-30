@@ -1,0 +1,14 @@
+.folder {
+    border-radius: 5px;
+    padding: 10px 0;
+    margin: 2px;
+}
+
+.folder:active {
+    background: lightblue;
+}
+
+.FolderList {
+    padding: 0;
+    margin: 0;
+}

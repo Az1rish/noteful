@@ -1,3 +1,10 @@
-.mainPage {
-    display: flex;
+.mainFolders {
+    grid-area: sidebar;
+    height: calc(100vh - 150px);
+}
+
+.mainNotes {
+    grid-area: main;
+    height: calc(100vh - 150px);
+    overflow: auto;
 }

@@ -7,15 +7,18 @@ export default function Notes() {
     return (
         <ul className='NotesList'>
             {STORE.notes.map(note =>
-                <li key={note.id}>
-                    <Link to={`/note/${note.id}`}>
+                <Link 
+                    to={`/note/${note.id}`}
+                    key={note.id}>
+                    <li className='note'>                  
                         {note.name}
                         {note.modified}
                         <button className='deleteNote'>
                             Delete Note
                         </button>
-                    </Link>
-                </li>)}
-        </ul>
+                    </li>
+                </Link>
+            )}
+        </ul> 
     )
 }
