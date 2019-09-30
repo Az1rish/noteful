@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Notes.css';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 export default function Notes(props) {
-    console.log(props.modified);
     return (
         <div className='Note'>
             <h2 className='Note-title'>
@@ -20,7 +19,7 @@ export default function Notes(props) {
                     Modified
                     {' '}
                     <span className='Date'>
-                        {format(props.modified, 'Do MMM YYYY')}
+                        {format(parseISO(props.modified), 'Do MMM yyyy')}
                     </span>
                 </div>
             </div>

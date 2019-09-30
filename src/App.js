@@ -27,7 +27,7 @@ export default class App extends Component {
 
   componentDidMount() {
     // simulate API call loading
-    setTimeout(() => this.setState(STORE), 1200);
+    setTimeout(() => this.setState(STORE), 500);
   }
 
   renderFolderRoutes() {
@@ -54,7 +54,7 @@ export default class App extends Component {
             const {noteId} = routeProps.match.params;
             const note = findNote(notes,noteId) || {};
             const folder = findFolder(folders, note.folderId);
-            return <FolderPage {...routeProps} folder={folder} />;
+            return <Folders {...routeProps} folder={folder} />;
           }}
         />
         <Route path='/add-folder' component={Folders} />
@@ -64,7 +64,7 @@ export default class App extends Component {
   }
 
   renderNoteRoutes() {
-    const {notes, folders} = this.state;
+    const {notes} = this.state;
     return (
       <>
         {['/', '/folder/:folderId'].map(path => (
