@@ -4,6 +4,8 @@ import './Notes.css';
 import { format, parseISO } from 'date-fns';
 
 export default function Notes(props) {
+    console.log(props.modified);
+    console.log(parseISO(props.modified));
     return (
         <div className='Note'>
             <h2 className='Note-title'>
@@ -19,7 +21,7 @@ export default function Notes(props) {
                     Modified
                     {' '}
                     <span className='Date'>
-                        {format(parseISO(props.modified), 'Do MMM yyyy')}
+                        {format(parseISO(props.modified), 'do MMM yyyy')}
                     </span>
                 </div>
             </div>

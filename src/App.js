@@ -90,6 +90,7 @@ export default class App extends Component {
         <Route
           path='/note/:noteId'
           render={routeProps => {
+            console.log(routeProps);
             const {noteId} = routeProps.match.params;
             const note = findNote(notes,noteId);
             return <NotePage {...routeProps} note={note} />;

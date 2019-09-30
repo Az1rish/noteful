@@ -6,12 +6,12 @@ export default function NotePage(props) {
     return (
         <section className='NotePage'>
             <Notes
-                id={props.notes.id}
-                name={props.notes.name}
-                modified={props.notes.modified}
+                id={props.note.id}
+                name={props.note.name}
+                modified={props.note.modified}
             />
             <div className='NotePage-content'>
-                {props.notes.content.split(/\n \r|\n/).map((para, i) =>
+                {props.note.content.split(/\n \r|\n/).map((para, i) =>
                     <p key={i}>{para}</p>
                 )}
             </div>
