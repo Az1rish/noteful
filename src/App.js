@@ -8,10 +8,6 @@ import NotePage from './NotePage/NotePage';
 import STORE from './Store';
 import NotefulContext from './NotefulContext';
 
-
-
-
-
 export default class App extends Component {
   state = {
     notes: [],
@@ -29,7 +25,7 @@ export default class App extends Component {
       folders: this.state.folders,
       addFolder: this.addFolder,
     }
-    const { notes, folders} = this.state;
+    
 
     return (
       <NotefulContext.Provider value={contextValue}>
@@ -69,7 +65,6 @@ export default class App extends Component {
       notes: this.state.notes,
       addNote: this.addNote,
     }
-    const { notes } = this.state;
 
     return (
       <NotefulContext.Provider value={contextValue}>
