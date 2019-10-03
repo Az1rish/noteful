@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './FolderPage.css';
+import NotefulContext from '../NotefulContext';
 
-export default function FolderPage(props) {
-    const countNotesForFolder = (notes=[], folderId) =>
-        notes.filter(note => note.folderId === folderId).length
-    return (
+export default class FolderPage extends Component {
+    static contextType = NotefulContext;
+
+    render() {
+        const { folders, notes } = this.context
+        const countNotesForFolder = (notes=[], folderId) =>
+            notes.filter(note => note.folderId === folderId).length
+
+        return (
         <div className='FolderPage'>
             <ul className='FolderPage-list'>
-                {props.folders.map(folder =>
+                {folders.map(folder =>
                     <li key={folder.id}>
                         <NavLink
                             className='FolderPage-folder'
                             to={`/folder/${folder.id}`}
                         >
                             <span className='FolderPage-num'>
-                                {countNotesForFolder(props.notes, folder.id)}
+                                {countNotesForFolder(notes, folder.id)}
                             </span>
                             {folder.name}
                         </NavLink>
@@ -27,6 +33,8 @@ export default function FolderPage(props) {
             </div>
         </div>
     )
+    }
+    
 }
 
 FolderPage.defaultProps = {

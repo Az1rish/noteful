@@ -8,17 +8,9 @@ import NotePage from './NotePage/NotePage';
 import STORE from './Store';
 import NotefulContext from './NotefulContext';
 
-const findFolder = (folders=[], folderId) =>
-  folders.find(folder => folder.id === folderId)
 
-const findNote = (notes=[], noteId) =>
-  notes.find(note => note.id === noteId)
 
-const getNotesForFolder = (notes=[], folderId) => (
-  (!folderId)
-    ? notes
-    : notes.filter(note => note.folderId === folderId)
-)
+
 
 export default class App extends Component {
   state = {
@@ -33,7 +25,7 @@ export default class App extends Component {
 
   renderFolderRoutes() {
     const contextValue = {
-      bookmarks: this.state.bookmarks,
+      notes: this.state.notes,
       folders: this.state.folders,
       addFolder: this.addFolder,
     }
@@ -46,23 +38,25 @@ export default class App extends Component {
             exact
             key={path}
             path={path}
-            render={routeProps => (
-              <FolderPage
-                folders={folders}
-                notes={notes}
-                {...routeProps}
-              />
-            )}
+            // render={routeProps => (
+              // <FolderPage
+                // folders={folders}
+                // notes={notes}
+                // {...routeProps}
+              // />
+            // )}
+            component={FolderPage}
           />
         ))}
         <Route
           path='/note/:noteId'
-          render={routeProps => {
-            const {noteId} = routeProps.match.params;
-            const note = findNote(notes,noteId) || {};
-            const folder = findFolder(folders, note.folderId);
-            return <Folders {...routeProps} folder={folder} />;
-          }}
+          // render={routeProps => {
+            // const {noteId} = routeProps.match.params;
+            // const note = findNote(notes,noteId) || {};
+            // const folder = findFolder(folders, note.folderId);
+            // return <Folders {...routeProps} folder={folder} />;
+            // }
+          component={Folders}
         />
         <Route path='/add-folder' component={Folders} />
         <Route path='/add-note' component={Folders} />
@@ -84,29 +78,31 @@ export default class App extends Component {
             exact
             key={path}
             path={path}
-            render={routeProps => {
-              const {folderId} = routeProps.match.params;
-              const notesForFolder = getNotesForFolder(
-                notes,
-                folderId
-              );
-              return(
-                <MainPage
-                  {...routeProps}
-                  notes={notesForFolder}
-                />
-              );
-            }}
+            // render={routeProps => {
+              // const {folderId} = routeProps.match.params;
+              // const notesForFolder = getNotesForFolder(
+                // notes,
+                // folderId
+              // );
+              // return(
+                // <MainPage
+                  // {...routeProps}
+                  // notes={notesForFolder}
+                // />
+              // );
+            // }}
+            component={MainPage}
           />
         ))}
         <Route
           path='/note/:noteId'
-          render={routeProps => {
-            console.log(routeProps);
-            const {noteId} = routeProps.match.params;
-            const note = findNote(notes,noteId);
-            return <NotePage {...routeProps} note={note} />;
-          }}
+          // render={routeProps => {
+            // console.log(routeProps);
+            // const {noteId} = routeProps.match.params;
+            // const note = findNote(notes,noteId);
+            // return <NotePage {...routeProps} note={note} />;
+          // }}
+          component={NotePage}
         />
       </NotefulContext.Provider>
     );
