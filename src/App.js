@@ -6,6 +6,7 @@ import FolderPage from './FolderPage/FolderPage';
 import Folders from './Folders/Folders';
 import NotePage from './NotePage/NotePage';
 import STORE from './Store';
+import NotefulContext from './NotefulContext';
 
 const findFolder = (folders=[], folderId) =>
   folders.find(folder => folder.id === folderId)
@@ -31,9 +32,13 @@ export default class App extends Component {
   }
 
   renderFolderRoutes() {
-    const {notes, folders} = this.state;
+    const contextValue = {
+      bookmarks: this.state.bookmarks,
+      folders: this.state.folders,
+      addFolder: this.addFolder,
+    }
     return (
-      <>
+      <NotefulContext.Provider value={contextValue}>
         {['/', '/folder/:folderId'].map(path => (
           <Route
             exact
@@ -59,14 +64,17 @@ export default class App extends Component {
         />
         <Route path='/add-folder' component={Folders} />
         <Route path='/add-note' component={Folders} />
-      </>
+      </NotefulContext.Provider>
     );
   }
 
   renderNoteRoutes() {
-    const {notes} = this.state;
+    const contextValue = {
+      notes: this.state.notes,
+      addNote: this.addNote,
+    }
     return (
-      <>
+      <NotefulContext.Provider value={contextValue}>
         {['/', '/folder/:folderId'].map(path => (
           <Route
             exact
@@ -96,7 +104,7 @@ export default class App extends Component {
             return <NotePage {...routeProps} note={note} />;
           }}
         />
-      </>
+      </NotefulContext.Provider>
     );
   }
 
