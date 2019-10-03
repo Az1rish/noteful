@@ -37,6 +37,8 @@ export default class App extends Component {
       folders: this.state.folders,
       addFolder: this.addFolder,
     }
+    const { notes, folders} = this.state;
+
     return (
       <NotefulContext.Provider value={contextValue}>
         {['/', '/folder/:folderId'].map(path => (
@@ -73,6 +75,8 @@ export default class App extends Component {
       notes: this.state.notes,
       addNote: this.addNote,
     }
+    const { notes } = this.state;
+
     return (
       <NotefulContext.Provider value={contextValue}>
         {['/', '/folder/:folderId'].map(path => (
