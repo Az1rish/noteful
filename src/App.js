@@ -26,7 +26,6 @@ export default class App extends Component {
       addFolder: this.addFolder,
     }
     
-
     return (
       <NotefulContext.Provider value={contextValue}>
         {['/', '/folder/:folderId'].map(path => (
@@ -34,24 +33,11 @@ export default class App extends Component {
             exact
             key={path}
             path={path}
-            // render={routeProps => (
-              // <FolderPage
-                // folders={folders}
-                // notes={notes}
-                // {...routeProps}
-              // />
-            // )}
             component={FolderPage}
           />
         ))}
         <Route
           path='/note/:noteId'
-          // render={routeProps => {
-            // const {noteId} = routeProps.match.params;
-            // const note = findNote(notes,noteId) || {};
-            // const folder = findFolder(folders, note.folderId);
-            // return <Folders {...routeProps} folder={folder} />;
-            // }
           component={Folders}
         />
         <Route path='/add-folder' component={Folders} />
@@ -73,30 +59,11 @@ export default class App extends Component {
             exact
             key={path}
             path={path}
-            // render={routeProps => {
-              // const {folderId} = routeProps.match.params;
-              // const notesForFolder = getNotesForFolder(
-                // notes,
-                // folderId
-              // );
-              // return(
-                // <MainPage
-                  // {...routeProps}
-                  // notes={notesForFolder}
-                // />
-              // );
-            // }}
             component={MainPage}
           />
         ))}
         <Route
           path='/note/:noteId'
-          // render={routeProps => {
-            // console.log(routeProps);
-            // const {noteId} = routeProps.match.params;
-            // const note = findNote(notes,noteId);
-            // return <NotePage {...routeProps} note={note} />;
-          // }}
           component={NotePage}
         />
       </NotefulContext.Provider>
