@@ -7,12 +7,12 @@ export default class NotePage extends Component {
     static contextType = NotefulContext;
 
     render() {
+        const { notes } = this.context
+        const { noteId } = this.props.match.params;
         const findNote = (notes=[], noteId) =>
             notes.find(note => note.id === noteId)
-        const { notes } = this.context
-        const {noteId} = this.props.match.params;
         const note = findNote(notes,noteId);
-        
+
         return (
             <section className='NotePage'>
                 <Notes

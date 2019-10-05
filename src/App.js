@@ -5,7 +5,7 @@ import MainPage from './MainPage/MainPage';
 import FolderPage from './FolderPage/FolderPage';
 import Folders from './Folders/Folders';
 import NotePage from './NotePage/NotePage';
-import STORE from './Store';
+import config from './config';
 import NotefulContext from './NotefulContext';
 
 export default class App extends Component {
@@ -15,78 +15,90 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    // simulate API call loading
-    setTimeout(() => this.setState(STORE), 500);
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/notes`),
+      fetch(`${config.API_ENDPOINT}/folders`)
+    ])
+      .then(([notesRes, foldersRes]) => {
+        if (!notesRes.ok)
+          return notesRes.json().then(e => Promise.reject(e));
+        if (!foldersRes.ok)
+          return foldersRes.json().then(e => Promise.reject(e));
+        return Promise.all([notesRes.json(), foldersRes.json()]);
+      })
+      .then(([notes, folders]) => {
+        this.setState({notes, folders});
+      })
+      .catch(error => {
+        console.error({error});
+      });
   }
+
+  handleDeleteNote = noteId => {
+    this.setState({
+      notes: this.state.notes.filter(note => note.id !== noteId)
+    });
+  };
 
   renderFolderRoutes() {
-    const contextValue = {
-      notes: this.state.notes,
-      folders: this.state.folders,
-      addFolder: this.addFolder,
-    }
-    
     return (
-      <NotefulContext.Provider value={contextValue}>
-        {['/', '/folder/:folderId'].map(path => (
-          <Route
-            exact
-            key={path}
-            path={path}
-            component={FolderPage}
-          />
-        ))}
-        <Route
-          path='/note/:noteId'
-          component={Folders}
-        />
-        <Route path='/add-folder' component={Folders} />
-        <Route path='/add-note' component={Folders} />
-      </NotefulContext.Provider>
-    );
-  }
+      <>
+          {['/', '/folder/:folderId'].map(path => (
+              <Route
+                  exact
+                  key={path}
+                  path={path}
+                  component={FolderPage}
+              />
+          ))}
+          <Route path="/note/:noteId" component={Folders} />
+          <Route path="/add-folder" component={Folders} />
+          <Route path="/add-note" component={Folders} />
+      </>
+  );
+}
 
   renderNoteRoutes() {
-    const contextValue = {
-      notes: this.state.notes,
-      addNote: this.addNote,
-    }
-
     return (
-      <NotefulContext.Provider value={contextValue}>
-        {['/', '/folder/:folderId'].map(path => (
-          <Route
-            exact
-            key={path}
-            path={path}
-            component={MainPage}
-          />
-        ))}
-        <Route
-          path='/note/:noteId'
-          component={NotePage}
-        />
-      </NotefulContext.Provider>
+      <>
+          {['/', '/folder/:folderId'].map(path => (
+              <Route
+                  exact
+                  key={path}
+                  path={path}
+                  component={MainPage}
+              />
+          ))}
+          <Route path="/note/:noteId" component={NotePage} />
+      </>
     );
   }
 
   render() {
+    const value = {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      deleteNote: this.handleDeleteNote
+    };
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1>
-            <Link to='/'>
-              Noteful
-            </Link>
-          </h1>
-        </header>
-        <nav className='App-nav'>
-          {this.renderFolderRoutes()}
-        </nav>
-        <main className='App-main'>
-          {this.renderNoteRoutes()} 
-        </main>
-      </div>
+      <NotefulContext.Provider value={value}>
+        <div className="App">
+          <header className="App-header">
+            <h1>
+              <Link to='/'>
+                Noteful
+              </Link>
+            </h1>
+          </header>
+          <nav className='App-nav'>
+            {this.renderFolderRoutes()}
+          </nav>
+          <main className='App-main'>
+            {this.renderNoteRoutes()} 
+          </main>
+        </div>
+      </NotefulContext.Provider>
     );
   }
 }

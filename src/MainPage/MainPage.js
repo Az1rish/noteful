@@ -9,12 +9,12 @@ export default class MainPage extends Component {
     render() {
         const getNotesForFolder = (notes=[], folderId) => (
             (!folderId)
-              ? notes
-              : notes.filter(note => note.folderId === folderId)
-          )
+            ? notes
+            : notes.filter(note => note.folderId === folderId)
+        )
+
         const {folderId} = this.props.match.params;
-        console.log(this.context)
-        console.log(folderId)
+       
         const notes = getNotesForFolder(
             this.context.notes,
             folderId
