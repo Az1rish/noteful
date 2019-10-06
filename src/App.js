@@ -41,6 +41,12 @@ export default class App extends Component {
     });
   };
 
+  handleAddFolder = folder => {
+    this.setState({
+      folders: [...this.state.folders, folder]
+    })
+  }
+
   renderFolderRoutes() {
     return (
       <>
@@ -79,7 +85,8 @@ export default class App extends Component {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
-      deleteNote: this.handleDeleteNote
+      deleteNote: this.handleDeleteNote,
+      addFolder: this.handleAddFolder,
     };
 
     return (
