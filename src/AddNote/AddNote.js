@@ -65,7 +65,7 @@ export default class AddNote extends Component {
                         className='AddNote__error' role='alert'>
                         {error && <p>{error.message}</p>}
                     </div>
-                    <div>
+                    <div className="AddNote__fields">
                         <label htmlFor='NoteName'>
                             Name:
                             {' '}

@@ -20,10 +20,11 @@ export default class FolderPage extends Component {
                             className='FolderPage-folder'
                             to={`/folder/${folder.id}`}
                         >
+                            {folder.name}
+                            {' '}
                             <span className='FolderPage-num'>
                                 {countNotesForFolder(notes, folder.id)}
                             </span>
-                            {folder.name}
                         </NavLink>
                     </li>
                 )}

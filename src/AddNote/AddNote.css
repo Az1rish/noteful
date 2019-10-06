@@ -1,0 +1,8 @@
+.AddNote {
+    text-align: left;
+}
+
+.AddNote__fields {
+    display: flex;
+    flex-direction: column;
+}
