@@ -13,11 +13,10 @@ export default class AddFolder extends Component {
     handleSubmit = e => {
         e.preventDefault()
         const { FolderName } = e.target
-        console.log(FolderName);
         const folder = {
             name: FolderName.value
         }
-        console.log(folder)
+        
         this.setState({ error: null})
         fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST',
