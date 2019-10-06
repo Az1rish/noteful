@@ -12,11 +12,16 @@ export default class AddFolder extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        const { folder } = e.target
-        console.log(folder);
+        const { FolderName } = e.target
+        console.log(FolderName);
+        const folder = {
+            name: FolderName.value
+        }
+        console.log(folder)
         this.setState({ error: null})
         fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST',
+            body: JSON.stringify(folder),
             headers: {
                 'content-type': 'application/json'
             }
