@@ -5,6 +5,7 @@ import MainPage from './MainPage/MainPage';
 import FolderPage from './FolderPage/FolderPage';
 import Folders from './Folders/Folders';
 import NotePage from './NotePage/NotePage';
+import AddFolder from './AddFolder/AddFolder';
 import config from './config';
 import NotefulContext from './NotefulContext';
 
@@ -52,7 +53,7 @@ export default class App extends Component {
               />
           ))}
           <Route path="/note/:noteId" component={Folders} />
-          <Route path="/add-folder" component={Folders} />
+          <Route path="/add-folder" component={AddFolder} />
           <Route path="/add-note" component={Folders} />
       </>
   );

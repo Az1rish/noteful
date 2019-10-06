@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './FolderPage.css';
 import NotefulContext from '../NotefulContext';
 
@@ -29,7 +29,9 @@ export default class FolderPage extends Component {
                 )}
             </ul>
             <div className='FolderPage-button'>
+                <Link to={'/add-folder'}>
                 <button>Add Folder</button>
+                </Link>
             </div>
         </div>
     )
