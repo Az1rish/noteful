@@ -12,7 +12,39 @@ export default class AddNote extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        console.log(e.target)
+        const { NoteName, NoteFolder, NoteContent } = e.target
+        const note = {
+            name: NoteName.value,
+            modified: new Date(),
+            folderId: NoteFolder.value,
+            content: NoteContent.value,
+        }
+
+        this.setState({ error: null })
+        fetch(`${config.API_ENDPOINT}/notes`, {
+            method: 'POST',
+            body: JSON.stringify(note),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(res => {
+            if(!res.ok) {
+                return res.json().then(error => {
+                    throw error
+                })
+            }
+            return res.json()
+        })
+        .then(data => {
+            console.log(this.context)
+            note.value = ''
+            this.context.addNote(data)
+            this.props.history.push('/')
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
     }
 
     handleClickCancel = () => {
@@ -21,6 +53,7 @@ export default class AddNote extends Component {
 
     render() {
         const { error } = this.state
+        const { folders } = this.context
         
         return (
             <section className='AddNote'>
@@ -49,18 +82,43 @@ export default class AddNote extends Component {
                             Folder:
                             {' '}
                         </label>
-                        <input />
+                        <select 
+                            name='NoteFolder'
+                            id='NoteFolder'
+                            required
+                        >
+                            {folders.map(folder => 
+                                <option 
+                                    value={folder.id}
+                                    key={folder.id}>
+                                    {folder.name}
+                                </option>)}
+                        </select>
                         <label htmlFor='NoteContent'>
                             Content:
                             {' '}
                         </label>
-                        <input />
+                        <textarea
+                            name='NoteContent'
+                            id='NoteContent'
+                            placeholder="Type your note's content here..."
+                            rows={8}
+                            columns={80}
+                            required />
                     </div>
                     <div className='AddNote__buttons'>
-
+                        <button
+                            type='button'
+                            onClick={this.handleClickCancel}>
+                                Cancel
+                        </button>
+                        {' '}
+                        <button type='submit'>
+                            Save
+                        </button>
                     </div>
                 </form>
             </section>
-        )
+        );
     }
 }

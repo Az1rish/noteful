@@ -6,6 +6,7 @@ import FolderPage from './FolderPage/FolderPage';
 import Folders from './Folders/Folders';
 import NotePage from './NotePage/NotePage';
 import AddFolder from './AddFolder/AddFolder';
+import AddNote from './AddNote/AddNote';
 import config from './config';
 import NotefulContext from './NotefulContext';
 
@@ -47,6 +48,12 @@ export default class App extends Component {
     })
   }
 
+  handleAddNote = note => {
+    this.setState({
+      notes: [...this.state.notes, note]
+    })
+  }
+
   renderFolderRoutes() {
     return (
       <>
@@ -59,8 +66,6 @@ export default class App extends Component {
               />
           ))}
           <Route path="/note/:noteId" component={Folders} />
-          <Route path="/add-folder" component={AddFolder} />
-          <Route path="/add-note" component={Folders} />
       </>
   );
 }
@@ -77,6 +82,8 @@ export default class App extends Component {
               />
           ))}
           <Route path="/note/:noteId" component={NotePage} />
+          <Route path="/add-folder" component={AddFolder} />
+          <Route path="/add-note" component={AddNote} />
       </>
     );
   }
@@ -87,6 +94,7 @@ export default class App extends Component {
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
       addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote,
     };
 
     return (

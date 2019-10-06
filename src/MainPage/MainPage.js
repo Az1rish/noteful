@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
 import Notes from '../Notes/Notes';
 import './MainPage.css';
@@ -35,7 +36,9 @@ export default class MainPage extends Component {
                     )}
                 </ul>
                 <div className='MainPage-buttonContainer'>
-                    <button>Add Note</button>
+                    <Link to={'/add-note'}>
+                        <button>Add Note</button>
+                    </Link>  
                 </div>
             </section>
         )

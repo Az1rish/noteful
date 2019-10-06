@@ -30,7 +30,7 @@ export default class FolderPage extends Component {
             </ul>
             <div className='FolderPage-button'>
                 <Link to={'/add-folder'}>
-                <button>Add Folder</button>
+                    <button>Add Folder</button>
                 </Link>
             </div>
         </div>
