@@ -1,14 +1,40 @@
 import React, { Component } from 'react';
 import NotefulContext from '../NotefulContext';
+import ValidationError from '../ValidationError/ValidationError';
 import config from '../config';
 import './AddFolder.css';
 
 export default class AddFolder extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: {
+                value: '',
+                touched: false
+            },
+            error: null,
+        }
+    }
+
     static contextType = NotefulContext;
 
-    state = {
-        error: null,
-    };
+    updateName(name) {
+        this.setState({
+            name: {
+                value: name,
+                touched: true
+            }
+        });
+    }
+
+    validateName() {
+        const name = this.state.name.value.trim();
+        if (name.length === 0) {
+            return 'Name is required';
+        } else if (name.length < 3) {
+            return 'Name must be at least 3 characters long';
+        }
+    }
 
     handleSubmit = e => {
         e.preventDefault()
@@ -49,6 +75,7 @@ export default class AddFolder extends Component {
 
     render() {
         const { error } = this.state
+        const nameError = this.validateName();
         
         return (
             <section className='AddFolder'>
@@ -72,6 +99,7 @@ export default class AddFolder extends Component {
                             placeholder='Folder Name'
                             required
                         />
+                        {this.state.name.touched && ( <ValidationError message={nameError}/> )}
                     </div>
                     <div className='AddFolder__buttons'>
                         <button

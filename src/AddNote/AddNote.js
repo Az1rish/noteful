@@ -127,7 +127,7 @@ export default class AddNote extends Component {
                             placeholder='Note Name'
                             required
                         />
-                        {this.state.name.touched && ( <ValidationError message={nameError}/>)}
+                        {this.state.name.touched && ( <ValidationError message={nameError}/> )}
                         <label htmlFor='NoteFolder'>
                             Folder:
                             {' '}
@@ -157,7 +157,7 @@ export default class AddNote extends Component {
                             columns={80}
                             required
                         />
-                        {this.state.content.touched && ( <ValidationError message={contentError}/>)}
+                        {this.state.content.touched && ( <ValidationError message={contentError}/> )}
                     </div>
                     <div className='AddNote__buttons'>
                         <button
