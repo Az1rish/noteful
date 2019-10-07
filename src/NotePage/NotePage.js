@@ -6,6 +6,7 @@ import './NotePage.css';
 export default class NotePage extends Component {
     static contextType = NotefulContext;
 
+
     render() {
         const { notes } = this.context
         const { noteId } = this.props.match.params;

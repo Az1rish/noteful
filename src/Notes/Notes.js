@@ -44,7 +44,8 @@ export default function Notes(props) {
                                 props.id,
                                 context.deleteNote,
                             )
-                        }}>
+                        }}
+                    >
                         Remove
                     </button>
                     <div className='Note-dates'>

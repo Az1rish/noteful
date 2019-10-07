@@ -15,8 +15,15 @@ import NotefulContext from './NotefulContext';
 export default class App extends Component {
   state = {
     notes: [],
-    folders: []
+    folders: [],
+    deleted: false,
   };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.state.deleted === true) {
+      this.setState({ deleted: false })
+    }
+  }
 
   componentDidMount() {
     Promise.all([
@@ -40,9 +47,9 @@ export default class App extends Component {
 
   handleDeleteNote = noteId => {
     this.setState({
-      notes: this.state.notes.filter(note => note.id !== noteId)
+      notes: this.state.notes.filter(note => note.id !== noteId),
+      deleted: true
     });
-    return <Redirect to='/' />;
   };
 
   handleAddFolder = folder => {
@@ -99,6 +106,10 @@ export default class App extends Component {
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
     };
+
+    if (this.state.deleted === true) {
+      return <Redirect to="/" />
+    }
 
     return (
       <NotefulContext.Provider value={value}>

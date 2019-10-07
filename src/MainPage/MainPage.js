@@ -21,7 +21,6 @@ export default class MainPage extends Component {
             folderId
         );
         
-
         return (
             <section className='MainPage'>
                 <ul>
@@ -45,6 +44,3 @@ export default class MainPage extends Component {
     } 
 }
 
-MainPage.defaultProps = {
-    notes: [],
-}

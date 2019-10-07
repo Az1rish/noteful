@@ -97,6 +97,7 @@ export default class AddFolder extends Component {
                             name='FolderName'
                             id='FolderName'
                             placeholder='Folder Name'
+                            onChange={e => this.updateName(e.target.value)}
                             required
                         />
                         {this.state.name.touched && ( <ValidationError message={nameError}/> )}
@@ -108,7 +109,11 @@ export default class AddFolder extends Component {
                                 Cancel
                         </button>
                         {' '}
-                        <button type='submit'>
+                        <button 
+                            type='submit'
+                            disabled={
+                                this.validateName()
+                            }>
                             Save
                         </button>
                     </div>
