@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Notes.css';
 import { format, parseISO } from 'date-fns';
 import NotefulContext from '../NotefulContext';
+import PropTypes from 'prop-types';
 import config from '../config';
 
 function deleteNoteRequest(noteId, cb) {
@@ -27,7 +28,8 @@ function deleteNoteRequest(noteId, cb) {
     })
 }
 
-export default function Notes(props) {    
+export default function Notes(props) { 
+    console.log(props)   
     return (
         <NotefulContext.Consumer>
             {(context) => (
@@ -61,4 +63,10 @@ export default function Notes(props) {
             )}
         </NotefulContext.Consumer>
     )
+}
+
+Notes.propTypes = {
+    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
 }

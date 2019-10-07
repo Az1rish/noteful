@@ -32,8 +32,3 @@ export default class NotePage extends Component {
     
 }
 
-NotePage.defaultProps = {
-    notes: {
-        content: '',
-    }
-}
