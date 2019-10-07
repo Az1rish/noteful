@@ -12,7 +12,7 @@ export default class NotePage extends Component {
         const findNote = (notes=[], noteId) =>
             notes.find(note => note.id === noteId)
         const note = findNote(notes,noteId);
-
+        
         return (
             <section className='NotePage'>
                 <Notes

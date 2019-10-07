@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 import MainPage from './MainPage/MainPage';
 import FolderPage from './FolderPage/FolderPage';
@@ -7,6 +7,7 @@ import Folders from './Folders/Folders';
 import NotePage from './NotePage/NotePage';
 import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
+import NotesError from './ValidationError/NotesError';
 import config from './config';
 import NotefulContext from './NotefulContext';
 
@@ -40,6 +41,7 @@ export default class App extends Component {
     this.setState({
       notes: this.state.notes.filter(note => note.id !== noteId)
     });
+    return <Redirect to='/' />;
   };
 
   handleAddFolder = folder => {
@@ -111,7 +113,9 @@ export default class App extends Component {
             {this.renderFolderRoutes()}
           </nav>
           <main className='App-main'>
-            {this.renderNoteRoutes()} 
+            <NotesError>
+              {this.renderNoteRoutes()}
+            </NotesError>
           </main>
         </div>
       </NotefulContext.Provider>
