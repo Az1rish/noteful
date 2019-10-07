@@ -8,6 +8,7 @@ import NotePage from './NotePage/NotePage';
 import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
 import NotesError from './ValidationError/NotesError';
+import FoldersError from './ValidationError/FoldersError';
 import config from './config';
 import NotefulContext from './NotefulContext';
 
@@ -110,7 +111,9 @@ export default class App extends Component {
             </h1>
           </header>
           <nav className='App-nav'>
-            {this.renderFolderRoutes()}
+            <FoldersError>
+              {this.renderFolderRoutes()}
+            </FoldersError>
           </nav>
           <main className='App-main'>
             <NotesError>
