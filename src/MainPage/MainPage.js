@@ -28,8 +28,8 @@ export default class MainPage extends Component {
                         <li key={note.id}>
                             <Notes
                                 id={note.id}
-                                name={note.name}
-                                modified={note.modified}
+                                name={note.title}
+                                modified={note.date_modified}
                             />
                         </li>
                     )}
