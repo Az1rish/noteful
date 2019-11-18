@@ -19,7 +19,7 @@ function deleteNoteRequest(note_id, cb) {
                 throw error
             })
         }
-        return res.json()
+        // return res.json()
     })
     .then(data => {
         cb(note_id)

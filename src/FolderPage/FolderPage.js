@@ -8,7 +8,7 @@ export default class FolderPage extends Component {
     
     render() {
         const { folders, notes } = this.context
-        console.log(this.context)
+        // console.log(this.context)
         const countNotesForFolder = (notes=[], folder_id) =>
             notes.filter(note => note.folder === folder_id).length
 

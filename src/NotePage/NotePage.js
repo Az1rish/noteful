@@ -9,19 +9,21 @@ export default class NotePage extends Component {
 
     render() {
         const { notes } = this.context;
+        
         const { note_id } = this.props.match.params;
-        console.log(this.props)
 
         const findNote = (notes=[], note_id) =>
-            notes.find(note => note.id === note_id)
-        const note = findNote(notes, note_id);
-         
+            notes.find(note => note.id === parseInt(note_id, 10))
+
+        const note = findNote(notes, note_id); 
+
         return (
             <section className='NotePage'>
                 <Notes
                     id={note.id}
-                    name={note.name}
-                    modified={note.date_modified}
+                    title={note.title}
+                    date_modified={note.date_modified}
+                    folder={note.folder}
                 />
                 <div className='NotePage-content'>
                     {note.content.split(/\n \r|\n/).map((para, i) =>

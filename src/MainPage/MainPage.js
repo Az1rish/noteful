@@ -8,17 +8,17 @@ export default class MainPage extends Component {
     static contextType = NotefulContext;
 
     render() {
-        const getNotesForFolder = (notes=[], folder) => (
-            (!folder)
+        const getNotesForFolder = (notes=[], folder_id) => (
+            (!folder_id)
             ? notes
-            : notes.filter(note => note.folder === folder)
+            : notes.filter(note => note.folder === Number(folder_id))
         )
 
-        const {folder} = this.props.match.params;
+        const { folder_id } = this.props.match.params;
        
         const notes = getNotesForFolder(
             this.context.notes,
-            folder
+            folder_id
         );
         
         return (

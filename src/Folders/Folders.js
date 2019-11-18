@@ -4,19 +4,19 @@ import './Folders.css';
 
 export default class Folders extends Component {
     static contextType = NotefulContext;
-    
+
     render() {
         const { notes, folders } = this.context
-        console.log(this.context)
+        
         const findFolder = (folders=[], id) =>
             folders.find(folder => folder.id === id)
 
-        const findNote = (notes=[], id) =>
-            notes.find(note => note.id === id)
+        const findNote = (notes=[], note_id) =>
+            notes.find(note => note.id === note_id)
 
-        const {id} = this.props.match.params;
-        console.log(this.props)
-        const note = findNote(notes, id) || {};
+        const { note_id } = this.props.match.params;
+        
+        const note = findNote(notes, note_id) || {};
         const folder = findFolder(folders, note.folder);
 
         return (
