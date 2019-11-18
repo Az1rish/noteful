@@ -6,8 +6,9 @@ import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
 import config from '../config';
 
-function deleteNoteRequest(noteId, cb) {
-    fetch(config.API_ENDPOINT + `/notes/${noteId}`, {          method: 'DELETE',
+function deleteNoteRequest(note_id, cb) {
+    fetch(config.API_ENDPOINT + `/notes/${note_id}`, {          
+        method: 'DELETE',
         headers: {
             'content-type': 'application/json'
         }
@@ -21,7 +22,7 @@ function deleteNoteRequest(noteId, cb) {
         return res.json()
     })
     .then(data => {
-        cb(noteId)
+        cb(note_id)
     })
     .catch(error => {
         console.error(error)
@@ -29,14 +30,15 @@ function deleteNoteRequest(noteId, cb) {
 }
 
 export default function Notes(props) { 
-    console.log(props)   
+    // console.log(props)
+       
     return (
         <NotefulContext.Consumer>
             {(context) => (
                 <div className='Note'>
                     <h2 className='Note-title'>
-                        <Link to={`/note/${props.id}`}>
-                            {props.name}
+                        <Link to={`/notes/${props.id}`}>
+                            {props.title}
                         </Link>
                     </h2>
                     <button 
@@ -55,7 +57,7 @@ export default function Notes(props) {
                             Modified
                             {' '}
                             <span className='Date'>
-                                {format(parseISO(props.modified), 'do MMM yyyy')}
+                                {format(parseISO(props.date_modified), 'do MMM yyyy')}
                             </span>
                         </div>
                     </div>
@@ -66,7 +68,8 @@ export default function Notes(props) {
 }
 
 Notes.propTypes = {
-    name: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    modified: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    date_modified: PropTypes.string.isRequired,
+    folder: PropTypes.number.isRequired,
 }

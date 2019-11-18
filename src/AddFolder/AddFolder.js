@@ -8,7 +8,7 @@ export default class AddFolder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: {
+            title: {
                 value: '',
                 touched: false
             },
@@ -18,21 +18,21 @@ export default class AddFolder extends Component {
 
     static contextType = NotefulContext;
 
-    updateName(name) {
+    updateName(title) {
         this.setState({
-            name: {
-                value: name,
+            title: {
+                value: title,
                 touched: true
             }
         });
     }
 
     validateName() {
-        const name = this.state.name.value.trim();
-        if (name.length === 0) {
-            return 'Name is required';
-        } else if (name.length < 3) {
-            return 'Name must be at least 3 characters long';
+        const title = this.state.title.value.trim();
+        if (title.length === 0) {
+            return 'Title is required';
+        } else if (title.length < 3) {
+            return 'Title must be at least 3 characters long';
         }
     }
 
@@ -40,7 +40,7 @@ export default class AddFolder extends Component {
         e.preventDefault()
         const { FolderName } = e.target
         const folder = {
-            name: FolderName.value
+            title: FolderName.value
         }
         
         this.setState({ error: null})
@@ -89,7 +89,7 @@ export default class AddFolder extends Component {
                     </div>
                     <div>
                         <label htmlFor='FolderName'>
-                            Name:
+                            Title:
                             {' '}
                         </label>
                         <input
@@ -100,7 +100,7 @@ export default class AddFolder extends Component {
                             onChange={e => this.updateName(e.target.value)}
                             required
                         />
-                        {this.state.name.touched && ( <ValidationError message={nameError}/> )}
+                        {this.state.title.touched && ( <ValidationError message={nameError}/> )}
                     </div>
                     <div className='AddFolder__buttons'>
                         <button

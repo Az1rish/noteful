@@ -4,17 +4,20 @@ import './Folders.css';
 
 export default class Folders extends Component {
     static contextType = NotefulContext;
+    
     render() {
         const { notes, folders } = this.context
-        const findFolder = (folders=[], folderId) =>
-            folders.find(folder => folder.id === folderId)
+        console.log(this.context)
+        const findFolder = (folders=[], id) =>
+            folders.find(folder => folder.id === id)
 
-        const findNote = (notes=[], noteId) =>
-            notes.find(note => note.id === noteId)
+        const findNote = (notes=[], id) =>
+            notes.find(note => note.id === id)
 
-        const {noteId} = this.props.match.params;
-        const note = findNote(notes,noteId) || {};
-        const folder = findFolder(folders, note.folderId);
+        const {id} = this.props.match.params;
+        console.log(this.props)
+        const note = findNote(notes, id) || {};
+        const folder = findFolder(folders, note.folder);
 
         return (
             <div className='Folders-nav'>
@@ -28,7 +31,7 @@ export default class Folders extends Component {
                 </button>
                 {folder && (
                     <h3 className='Folders-nav-folder'>
-                        {folder.name}
+                        {folder.title}
                     </h3>
                 )}
             </div>

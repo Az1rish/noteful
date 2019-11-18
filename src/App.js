@@ -45,9 +45,9 @@ export default class App extends Component {
       });
   }
 
-  handleDeleteNote = noteId => {
+  handleDeleteNote = note_id => {
     this.setState({
-      notes: this.state.notes.filter(note => note.id !== noteId),
+      notes: this.state.notes.filter(note => note.id !== note_id),
       deleted: true
     });
   };
@@ -67,7 +67,7 @@ export default class App extends Component {
   renderFolderRoutes() {
     return (
       <>
-          {['/', '/folder/:folderId'].map(path => (
+          {['/', '/folders/:folder_id'].map(path => (
               <Route
                   exact
                   key={path}
@@ -75,7 +75,7 @@ export default class App extends Component {
                   component={FolderPage}
               />
           ))}
-          <Route path="/note/:noteId" component={Folders} />
+          <Route path="/notes/:note_id" component={Folders} />
       </>
   );
 }
@@ -83,7 +83,7 @@ export default class App extends Component {
   renderNoteRoutes() {
     return (
       <>
-          {['/', '/folder/:folderId'].map(path => (
+          {['/', '/folders/:folder_id'].map(path => (
               <Route
                   exact
                   key={path}
@@ -91,7 +91,7 @@ export default class App extends Component {
                   component={MainPage}
               />
           ))}
-          <Route path="/note/:noteId" component={NotePage} />
+          <Route path="/notes/:note_id" component={NotePage} />
           <Route path="/add-folder" component={AddFolder} />
           <Route path="/add-note" component={AddNote} />
       </>
@@ -106,6 +106,7 @@ export default class App extends Component {
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
     };
+    // console.log(value)
 
     if (this.state.deleted === true) {
       return <Redirect to="/" />

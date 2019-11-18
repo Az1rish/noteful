@@ -5,11 +5,12 @@ import NotefulContext from '../NotefulContext';
 
 export default class FolderPage extends Component {
     static contextType = NotefulContext;
-
+    
     render() {
         const { folders, notes } = this.context
-        const countNotesForFolder = (notes=[], folderId) =>
-            notes.filter(note => note.folderId === folderId).length
+        console.log(this.context)
+        const countNotesForFolder = (notes=[], folder_id) =>
+            notes.filter(note => note.folder === folder_id).length
 
         return (
         <div className='FolderPage'>
@@ -18,9 +19,9 @@ export default class FolderPage extends Component {
                     <li key={folder.id}>
                         <NavLink
                             className='FolderPage-folder'
-                            to={`/folder/${folder.id}`}
+                            to={`/folders/${folder.id}`}
                         >
-                            {folder.name}
+                            {folder.title}
                             {' '}
                             <span className='FolderPage-num'>
                                 {countNotesForFolder(notes, folder.id)}

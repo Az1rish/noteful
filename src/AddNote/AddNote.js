@@ -8,7 +8,7 @@ export default class AddNote extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: {
+            title: {
                 value: '',
                 touched: false
             },
@@ -21,10 +21,10 @@ export default class AddNote extends Component {
     }
     static contextType = NotefulContext;
 
-    updateName(name) {
+    updateName(title) {
         this.setState({
-            name: {
-                value: name,
+            title: {
+                value: title,
                 touched: true
             }
         });
@@ -40,11 +40,11 @@ export default class AddNote extends Component {
     }
 
     validateName() {
-        const name = this.state.name.value.trim();
-        if (name.length === 0) {
-            return 'Name is required';
-        } else if (name.length < 3) {
-            return 'Name must be at least 3 characters long';
+        const title = this.state.title.value.trim();
+        if (title.length === 0) {
+            return 'Title is required';
+        } else if (title.length < 3) {
+            return 'Title must be at least 3 characters long';
         }
     }
 
@@ -61,9 +61,9 @@ export default class AddNote extends Component {
         e.preventDefault()
         const { NoteName, NoteFolder, NoteContent } = e.target
         const note = {
-            name: NoteName.value,
-            modified: new Date(),
-            folderId: NoteFolder.value,
+            title: NoteName.value,
+            date_modified: new Date(),
+            folder: NoteFolder.value,
             content: NoteContent.value,
         }
 
@@ -116,7 +116,7 @@ export default class AddNote extends Component {
                     </div>
                     <div className="AddNote__fields">
                         <label htmlFor='NoteName'>
-                            Name:
+                            Title:
                             {' '}
                         </label>
                         <input
@@ -127,7 +127,7 @@ export default class AddNote extends Component {
                             placeholder='Note Name'
                             required
                         />
-                        {this.state.name.touched && ( <ValidationError message={nameError}/> )}
+                        {this.state.title.touched && ( <ValidationError message={nameError}/> )}
                         <label htmlFor='NoteFolder'>
                             Folder:
                             {' '}
@@ -141,7 +141,7 @@ export default class AddNote extends Component {
                                 <option 
                                     value={folder.id}
                                     key={folder.id}>
-                                    {folder.name}
+                                    {folder.title}
                                 </option>)}
                         </select>
                         <label htmlFor='NoteContent'>
