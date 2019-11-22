@@ -106,7 +106,6 @@ export default class App extends Component {
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
     };
-    // console.log(value)
 
     if (this.state.deleted === true) {
       return <Redirect to="/" />

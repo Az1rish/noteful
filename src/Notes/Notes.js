@@ -30,8 +30,6 @@ function deleteNoteRequest(note_id, cb) {
 }
 
 export default function Notes(props) { 
-    // console.log(props)
-       
     return (
         <NotefulContext.Consumer>
             {(context) => (
