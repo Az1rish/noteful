@@ -14,7 +14,9 @@
     "start": "react-scripts start",
     "prebuild": "CI=true react-scripts test --colors",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --verbose",
+    "test:watch": "jest --watchAll --verbose",
+    "test:coverage": "jest --verbose --coverage",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "now --prod ./build",
@@ -34,5 +36,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "jest": "^24.9.0"
   }
 }
